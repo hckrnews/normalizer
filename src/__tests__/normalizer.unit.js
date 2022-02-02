@@ -7,6 +7,12 @@ describe('Filter', () => {
       pim_sku: String,
       pim_productgroupname: String
     }
+    const productSchema = {
+        sku: String,
+        group: {
+            name: String
+        }
+    };
     const rawData = [
       {
         pim_sku: '123',
@@ -19,7 +25,7 @@ describe('Filter', () => {
         name: data.pim_productgroupname
       }
     })
-    const Normalizer = makeNormalizer({ schema })
+    const Normalizer = makeNormalizer({ schemaFrom: schema, schemaTo: productSchema })
     const normalizer = new Normalizer()
     normalizer.data = rawData
     normalizer.mapping = mapping
@@ -37,7 +43,7 @@ describe('Filter', () => {
   })
 
   it('It should throw an exception if the mapping isnt a function', () => {
-    const Normalizer = makeNormalizer({ schema: {} })
+    const Normalizer = makeNormalizer({ schemaFrom: {}, schemaTo: {} })
     const normalizer = new Normalizer()
       expect(() => {
         normalizer.mapping = 42
@@ -56,7 +62,7 @@ describe('Filter', () => {
       }
     ]
 
-    const Normalizer = makeNormalizer({ schema })
+    const Normalizer = makeNormalizer({ schemaFrom: schema, schemaTo: {} })
     const normalizer = new Normalizer()
       expect(() => {
         normalizer.data = rawData
