@@ -25,6 +25,10 @@ export default ({ schema }) => {
         }
 
         set mapping(mapping) {
+            if (mapping.constructor !== Function) {
+                throw new Error('Mapping must be a function');
+            }
+
             this.#mapping = mapping;
         }
 
