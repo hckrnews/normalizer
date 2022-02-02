@@ -1,12 +1,12 @@
-# Create vanilla JavaScript enums
+# Normalize objects
 
 [![NPM version][npm-image]][npm-url] [![Bugs][bugs-image]][bugs-url] [![Code Smells][code-smells-image]][code-smells-url] [![Duplicated Lines (%)][duplicate-lines-image]][duplicate-lines-url] [![Maintainability Rating][maintainability-rate-image]][maintainability-rate-url] [![Reliability Rating][reliability-rate-image]][reliability-rate-url] [![Security Rating][security-rate-image]][security-rate-url] [![Technical Debt][technical-debt-image]][technical-debt-url] [![Vulnerabilities][vulnerabilitiest-image]][vulnerabilitiest-url] [![Quality Gate Status][quality-gate-image]][quality-gate-url] [![Coverage][coverage-image]][coverage-url]
 
 ## Installation
 
-`npm install @hckrnews/enum`
+`npm install @hckrnews/normalizer`
 or
-`yarn add @hckrnews/enum`
+`yarn add @hckrnews/normalizer`
 
 ## Test the package
 
@@ -17,92 +17,74 @@ or
 ## Usage
 
 ```javascript
-import Enum from '@hckrnews/enum'
+import makeNormalizer from '@hckrnews/normalizer';
 
-class Example extends Enum {
-  static test = 'TEXT'
-  static another = 42
+const schema = {
+    pim_sku: String,
+    pim_productgroupname: String
 }
+const Normalizer = makeNormalizer({ schema })
 
-Example.test // 'TEXT'
-Example.options // { test: 'TEXT', another: 42 }
-Example.options.test // 'TEXT'
+const normalizer = new Normalizer()
 
-const example = Example.fromKey('test')
-example.key // 'test'
-example.value // 'TEXT'
-example.values // [ 'TEXT', 42 ]
-example.keys // [ 'test', 'another ]
-example.test // 'TEXT'
-example.another // 42
-example.length // 2
-example.name // 'Example'
+const rawData = [
+    {
+        pim_sku: '123',
+        pim_productgroupname: 'Bike'
+    }
+]
+normalizer.data = rawData
 
-example.is(Example.test) // true
-example.is('TEXT') // true
-example.is(42) // false
-example.in([Example.test]) // true
-example.in(['TEXT']) // true
-example.in([42]) // false
+const mapping = (data) => ({
+    sku: data.pim_sku,
+    group: {
+        name: data.pim_productgroupname
+    }
+})
+normalizer.mapping = mapping
 
-example.valueOf() // 42
-example.toString() // 'test'
-example.toJSON() // 'test'
-JSON.stringify(example) // '"test"'
+normalizer.normalizedData
 
-const example = Example.create('test')
-example.key // 'test'
-example.value // 'TEXT'
-
-const example = Example.fromValue('TEXT')
-example.key // test
-example.value // TEXT
-
-Example.hasKey('test') // teue
-Example.hasKey('TEXT') // false
-Example.hasValue('test') // teue
-Example.hasValue('TEXT') // false
-
-Example.toJSON() // { test: 'TEXT', another: 42 }
-JSON.stringify(Example) // '{"test":"TEXT","another":42}'
-
-const example = Example.create('test', { output: 'value' })
-example.valueOf() // 42
-example.toString() // '42'
-example.toJSON() // 42
-JSON.stringify(example) // '42'
+[
+    {
+        sku: '123',
+        group: {
+            name: 'Bike'
+        }
+    }
+]
 ```
 
-[npm-url]: https://www.npmjs.com/package/@hckrnews/enum
-[npm-image]: https://img.shields.io/npm/v/@hckrnews/enum.svg
+[npm-url]: https://www.npmjs.com/package/@hckrnews/normalizer
+[npm-image]: https://img.shields.io/npm/v/@hckrnews/normalizer.svg
 
-[bugs-url]: https://sonarcloud.io/project/issues?id=hckrnews_enum&resolved=false&types=BUG
-[bugs-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_enum&metric=bugs
+[bugs-url]: https://sonarcloud.io/project/issues?id=hckrnews_normalizer&resolved=false&types=BUG
+[bugs-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_normalizer&metric=bugs
 
-[code-smells-url]: https://sonarcloud.io/project/issues?id=hckrnews_enum&resolved=false&types=CODE_SMELL
-[code-smells-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_enum&metric=code_smells
+[code-smells-url]: https://sonarcloud.io/project/issues?id=hckrnews_normalizer&resolved=false&types=CODE_SMELL
+[code-smells-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_normalizer&metric=code_smells
 
-[duplicate-lines-url]: https://sonarcloud.io/component_measures?id=hckrnews_enum&metric=duplicated_lines_density&view=list
-[duplicate-lines-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_enum&metric=duplicated_lines_density
+[duplicate-lines-url]: https://sonarcloud.io/component_measures?id=hckrnews_normalizer&metric=duplicated_lines_density&view=list
+[duplicate-lines-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_normalizer&metric=duplicated_lines_density
 
-[maintainability-rate-url]: https://sonarcloud.io/project/issues?id=hckrnews_enum&resolved=false&types=CODE_SMELL
-[maintainability-rate-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_enum&metric=sqale_rating
+[maintainability-rate-url]: https://sonarcloud.io/project/issues?id=hckrnews_normalizer&resolved=false&types=CODE_SMELL
+[maintainability-rate-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_normalizer&metric=sqale_rating
 
-[reliability-rate-url]: https://sonarcloud.io/component_measures?id=hckrnews_enum&metric=Reliability
-[reliability-rate-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_enum&metric=reliability_rating
+[reliability-rate-url]: https://sonarcloud.io/component_measures?id=hckrnews_normalizer&metric=Reliability
+[reliability-rate-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_normalizer&metric=reliability_rating
 
-[security-rate-url]: https://sonarcloud.io/project/security_hotspots?id=hckrnews_enum
-[security-rate-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_enum&metric=security_rating
+[security-rate-url]: https://sonarcloud.io/project/security_hotspots?id=hckrnews_normalizer
+[security-rate-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_normalizer&metric=security_rating
 
-[technical-debt-url]: https://sonarcloud.io/component_measures?id=hckrnews_enum
-[technical-debt-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_enum&metric=sqale_index
+[technical-debt-url]: https://sonarcloud.io/component_measures?id=hckrnews_normalizer
+[technical-debt-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_normalizer&metric=sqale_index
 
-[vulnerabilitiest-url]: https://sonarcloud.io/project/issues?id=hckrnews_enum&resolved=false&types=VULNERABILITY
-[vulnerabilitiest-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_enum&metric=vulnerabilities
+[vulnerabilitiest-url]: https://sonarcloud.io/project/issues?id=hckrnews_normalizer&resolved=false&types=VULNERABILITY
+[vulnerabilitiest-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_normalizer&metric=vulnerabilities
 
-[quality-gate-url]: https://sonarcloud.io/summary/new_code?id=hckrnews_enum
-[quality-gate-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_enum&metric=alert_status
+[quality-gate-url]: https://sonarcloud.io/summary/new_code?id=hckrnews_normalizer
+[quality-gate-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_normalizer&metric=alert_status
 
-[coverage-url]: https://sonarcloud.io/component_measures?id=hckrnews_enum&metric=coverage&view=list
-[coverage-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_enum&metric=coverage
+[coverage-url]: https://sonarcloud.io/component_measures?id=hckrnews_normalizer&metric=coverage&view=list
+[coverage-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_normalizer&metric=coverage
 

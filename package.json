@@ -19,9 +19,9 @@
     },
     "type": "module",
     "files": [
-        "src/enum.js"
+        "src/normalizer.js"
     ],
-    "main": "src/enum.js",
+    "main": "src/normalizer.js",
     "devDependencies": {
         "@babel/core": "^7.12.10",
         "@babel/eslint-parser": "^7.14.7",
@@ -48,13 +48,13 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/hckrnews/enum"
+        "url": "https://github.com/hckrnews/normalizer"
     },
     "engines": {
         "node": ">= 16"
     },
     "keywords": [
-        "enum"
+        "normalizer"
     ],
     "dependencies": {
         "@hckrnews/objects": "^3.6.0"
