@@ -1,13 +1,8 @@
 import Obj from '@hckrnews/objects';
 
-const productSchema = {
-    sku: String,
-};
-
-const Product = Obj({ schema: productSchema });
-
-export default ({ schema }) => {
-    const RawProduct = Obj({ schema });
+export default ({ schemaFrom, schemaTo }) => {
+    const RawProduct = Obj({ schema: schemaFrom });
+    const Product = Obj({ schema: schemaTo });
 
     return class Normalizer {
         /** @type {string[]} data */

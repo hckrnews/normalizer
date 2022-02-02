@@ -19,11 +19,17 @@ or
 ```javascript
 import makeNormalizer from '@hckrnews/normalizer';
 
-const schema = {
+const schemaFrom = {
     pim_sku: String,
     pim_productgroupname: String
 }
-const Normalizer = makeNormalizer({ schema })
+const schemaTo = {
+    sku: String,
+    group: {
+        name: String
+    }
+}
+const Normalizer = makeNormalizer({ schemaFrom, schemaTo })
 
 const normalizer = new Normalizer()
 
