@@ -21,6 +21,17 @@ export default ({ schemaFrom, schemaTo }) => {
         #mapping = null;
 
         /**
+         * Normalize the data.
+         * @param {object} params
+         * @param {object[]} params.data
+         * @param {function} params.mapping
+         */
+        constructor({ data, mapping }) {
+            this.data = data;
+            this.mapping = mapping;
+        }
+
+        /**
          * Set the data to be normalized.
          *
          * @param {object[]} data
