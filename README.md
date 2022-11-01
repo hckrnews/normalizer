@@ -31,15 +31,12 @@ const schemaTo = {
 }
 const Normalizer = makeNormalizer({ schemaFrom, schemaTo })
 
-const normalizer = new Normalizer()
-
 const rawData = [
     {
         pim_sku: '123',
         pim_productgroupname: 'Bike'
     }
 ]
-normalizer.data = rawData
 
 const mapping = (data) => ({
     sku: data.pim_sku,
@@ -47,7 +44,8 @@ const mapping = (data) => ({
         name: data.pim_productgroupname
     }
 })
-normalizer.mapping = mapping
+
+const normalizer = new Normalizer({ data: rawData, mapping })
 
 normalizer.normalizedData
 
