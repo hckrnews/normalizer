@@ -1,4 +1,4 @@
-import Obj from '@hckrnews/objects';
+import { Obj } from '@hckrnews/objects';
 
 /**
  * Normalizes data and validates it against a schema.
