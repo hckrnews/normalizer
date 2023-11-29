@@ -13,17 +13,18 @@ module.exports = {
 
     testMatch: ['**/__tests__/*.js'],
 
-    testURL: 'http://localhost/',
-
     collectCoverage: true,
     collectCoverageFrom: ['src/**/*.js'],
 
     reporters: [
-      'default',
-      [ 'jest-junit', {
-        outputDirectory: 'test-reports',
-        outputName: 'jest-junit.xml',
-      } ]
+        'default',
+        [
+            'jest-junit',
+            {
+                outputDirectory: 'test-reports',
+                outputName: 'jest-junit.xml',
+            },
+        ],
     ],
 
     testResultsProcessor: 'jest-sonar-reporter',
