@@ -54,6 +54,6 @@
         "normalizer"
     ],
     "dependencies": {
-        "@hckrnews/objects": "^6.0.0"
+        "@hckrnews/objects": "^6.0.12"
     }
 }
