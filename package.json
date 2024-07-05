@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/normalizer",
     "description": "Normalizer objects",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -54,6 +54,6 @@
         "normalizer"
     ],
     "dependencies": {
-        "@trojs/objects": "^8.0.0"
+        "@trojs/objects": "^8.0.4"
     }
 }
