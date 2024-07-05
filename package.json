@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/normalizer",
     "description": "Normalizer objects",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -40,7 +40,7 @@
         "jest": "^29.0.0",
         "jest-junit": "^16.0.0",
         "jest-sonar-reporter": "^2.0.0",
-        "jscpd": "^3.3.26",
+        "jscpd": "^4.0.0",
         "prettier": "^3.0.0"
     },
     "repository": {
@@ -54,6 +54,6 @@
         "normalizer"
     ],
     "dependencies": {
-        "@hckrnews/objects": "^6.0.0"
+        "@trojs/objects": "^8.0.0"
     }
 }
