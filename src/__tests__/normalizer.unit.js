@@ -82,6 +82,7 @@ describe('Filter', () => {
                 },
             },
         ];
+
         expect(normalizer.normalizedData).toEqual(expected);
         expect(normalizer.data).toEqual(rawData);
         expect(normalizer.mapping).toEqual(mapping);

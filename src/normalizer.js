@@ -1,4 +1,4 @@
-import { Obj } from '@hckrnews/objects';
+import { Obj } from '@trojs/objects';
 
 /**
  * Normalizes data and validates it against a schema.
