@@ -54,6 +54,6 @@
         "normalizer"
     ],
     "dependencies": {
-        "@trojs/objects": "^8.0.4"
+        "@trojs/objects": "^9.0.0"
     }
 }
